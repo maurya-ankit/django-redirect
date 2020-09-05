@@ -7,14 +7,18 @@ from django.contrib.auth.models import User
 
 
 # Create your views here.
-def register(response):
-    if response.method == "POST":
-	    form = RegisterForm(response.POST)
-	    if form.is_valid():
-	        form.save()
 
-	    return redirect("/")
+def register(request):
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            login(request, user)
+            return redirect('/')
     else:
-	    form = RegisterForm()
-	    totalUser=User.objects.count()
-    return render(response, "register/register.html", {"form":form,'total':totalUser})
+        form = RegisterForm()
+    totalUser=User.objects.count()
+    return render(request, 'register/register.html', {'form': form,'total':totalUser})

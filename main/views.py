@@ -7,9 +7,7 @@ from django.views import View
 from django.contrib.auth.decorators import login_required
 # Create your views here.
 
-def Home(request,token):
-    res = shorten.objects.filter(shorturi = token)[0].uri
-    return redirect(res)
+
 @login_required(login_url='/login/')
 def index(request):
     query = shorten.objects.all()
@@ -17,6 +15,9 @@ def index(request):
 
     return render(request,'index.html',context)
 
+def Home(request,token):
+    res = shorten.objects.get(shorturi =token).uri
+    return redirect(res)
 
 class short(View):
     def get(self,request):
