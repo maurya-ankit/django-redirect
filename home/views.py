@@ -9,10 +9,10 @@ from django.views import View
 # @login_required(login_url='/login/')
 def index(request):
     if request.user.is_authenticated:
-        query = UserShort.objects.filter(user=request.user)
+        query = UserShort.objects.filter(user=request.user).order_by('-pk')
         context = {'query':query}
     else:
-        query = shorten.objects.all()
+        query = shorten.objects.all().order_by('-pk')
         context = {'query':query}
 
     return render(request,'index.html',context)
