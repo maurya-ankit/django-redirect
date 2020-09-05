@@ -4,12 +4,13 @@ import http.server
 import requests
 from urllib.parse import unquote, parse_qs
 from django.views import View
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 def Home(request,token):
     res = shorten.objects.filter(shorturi = token)[0].uri
     return redirect(res)
-
+@login_required(login_url='/login/')
 def index(request):
     query = shorten.objects.all()
     context = {'query':query}
