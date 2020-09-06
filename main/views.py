@@ -8,7 +8,6 @@ from django.contrib.auth.decorators import login_required
 
 
 def homepage(request,token):
-    # res=get_object_or_404(shorten,shorturi=token)
     try:
         try:
             res=shorten.objects.filter(shorturi=token)[0].uri

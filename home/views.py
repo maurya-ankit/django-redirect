@@ -42,7 +42,7 @@ class short(View):
                 object.shorturi=shorturi
                 object.user = request.user
                 object.save()
-                return redirect(index)
+                return redirect('home:index')
         else:
             url = request.POST.get('url')
             if url=="":
@@ -54,4 +54,4 @@ class short(View):
                 object=shorten()
                 object.uri=url
                 object.save()
-                return redirect(index)
+                return redirect('home:index')
