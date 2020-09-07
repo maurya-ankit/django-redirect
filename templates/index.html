@@ -32,5 +32,8 @@
   {%endfor%}
   </tbody>
 </table>
+      {% if user.is_authenticated %}
+      *Visits column in this table shows only number of <b>visits through short url</b> only
+      {%endif%}
 </div>
  {% endblock %}
