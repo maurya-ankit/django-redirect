@@ -34,6 +34,9 @@ class short(View):
             if url== "" or shorturi == "":
                 err_msg = "All Fields are Required!"
                 context = {'err_msg':err_msg}
+            elif UserShort.objects.filter(user=request.user,shorturi=shorturi):
+                err_msg="A short url with this name already exist. Try another"
+                context = {'err_msg':err_msg}
             if err_msg:
                 return render(request,'usershort.html',context)
             else:

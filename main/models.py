@@ -23,7 +23,7 @@ class shorten(models.Model):
 
 class UserShort(models.Model):
     uri = models.URLField('Enter original uri ')
-    shorturi = models.CharField('save the model for shorten uri',max_length=10,unique=True,null=True,blank=True)
+    shorturi = models.CharField('save the model for shorten uri',max_length=10,null=True,blank=True)
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     count = models.IntegerField(default=0)
 

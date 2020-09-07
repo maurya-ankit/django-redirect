@@ -18,7 +18,14 @@
   {%for object in query%}
     <tr>
       <td>{{object.uri }}</td>
+      {%if user.is_authenticated %}
+
+      <td><a href="{{user}}/{{object.shorturi}}">{{object.shorturi}}</a></td>
+      {%else%}
       <td><a href="/{{object.shorturi}}">{{object.shorturi}}</a></td>
+
+      {%endif%}
+
       {%if user.is_authenticated %}
 
       <td>{{object.count }}</td>
