@@ -1,32 +1,58 @@
 {% extends "base.html" %}
+{%load static%}
 
-{% block title %}Create an Account{% endblock %}
-{% load crispy_forms_tags %}
+{% block stylesheet %}
+<link rel="stylesheet" href="{% static 'fonts/material-icon/css/material-design-iconic-font.min.css' %}">
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+{%endblock%}
 
 {% block content %}
-    <form method="POST" class="form-group">
-	{% csrf_token %}
-	{{ form|crispy }}
-	<button type="submit" class="btn btn-success">Register</button>
-    </form>
+
+<section class="signup">
+  <div class="container">
+      <div class="signup-content">
+          <div class="signup-form">
+              <h2 class="form-title">Sign up</h2>
+              <form method="POST" class="register-form" id="register-form">
+	                {% csrf_token %}
+                  {{ form.non_field_errors }}
+                  <div class="form-group">
+                      {{ form.username.errors }}
+                      <label for="{{ form.username.id_for_label }}"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                      {{ form.username }}
+                  </div>
+                  <div class="form-group">
+                    {{ form.email.errors }}
+                      <label for="{{ form.email.id_for_label }}"><i class="zmdi zmdi-email"></i></label>
+                      {{ form.email }}
+                  </div>
+                  <div class="form-group">
+                    {{ form.password1.errors }}
+                      <label for="{{ form.password1.id_for_label }}"><i class="zmdi zmdi-lock"></i></label>
+                      {{ form.password1 }}
+                  </div>
+                  <div class="form-group">
+                    {{ form.password2.errors }}
+                      <label for="{{ form.password2.id_for_label }}"><i class="zmdi zmdi-lock-outline"></i></label>
+                      {{ form.password2 }}
+                  </div>
+                  <div class="form-group form-button">
+                      <input type="submit" name="signup" id="signup" class="form-submit" value="Register"/>
+                  </div>
+              </form>
+          </div>
+          <div class="signup-image">
+              <figure><img src="{% static 'images/signup-image.jpg' %}" alt="sing up image"></figure>
+              <a href="/login/" class="signup-image-link">I am already member</a>
+          </div>
+      </div>
+  </div>
+</section>
 {% endblock %}
-{%block footer%}
-<div class="row">
-  <div class="col-sm-6">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">Total Family Member</h5>
-        <p class="card-text">{{total}}</p>
-      </div>
-    </div>
-  </div>
-  <div class="col-sm-6">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">Developed by <kbd>Ankit Maurya</kbd></h5>
-        <p class="card-text"><a href="https://maurya-ankit.github.io/">https://maurya-ankit.github.io/</a></p>
-      </div>
-    </div>
-  </div>
-</div>
+
+{% block javascr%}
+<script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
 {%endblock%}

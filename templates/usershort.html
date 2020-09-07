@@ -1,5 +1,6 @@
 {%extends 'base.html' %}
 {%block content%}
+<div class="container mt-4">
 {%if err_msg%}
 <div class="alert alert-danger text-center" role="alert">
     {{err_msg}}
@@ -17,8 +18,9 @@
             </div>
             <div class="form-group mx-sm-3 mb-2">
                 <label for="forshorturl" class="sr-only">Url</label>
-                <input type="text" class="form-control" name="shorturl" id="forshorturl" placeholder="Enter original url">
+                <input type="text" class="form-control" name="shorturl" id="forshorturl" placeholder="Enter short name">
               </div>
             <button type="submit" class="btn btn-primary mb-2">short it</button>
           </form>
+        </div>
           {% endblock %}
