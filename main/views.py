@@ -11,8 +11,18 @@ def homepage(request,token):
     try:
         try:
             res=shorten.objects.filter(shorturi=token)[0].uri
+            obj=shorten.objects.filter(shorturi=token)[0]
+            newcount=int(obj.count)+1
+            obj.count=newcount
+            obj.save()
+
         except:
             res=UserShort.objects.filter(shorturi=token)[0].uri
+            obj=UserShort.objects.filter(shorturi=token)[0]
+            newcount=int(obj.count)+1
+            obj.count=newcount
+            obj.save()
+
     except:
         return redirect(f'/{token}/')
     return redirect(res)

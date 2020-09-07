@@ -9,6 +9,9 @@
     <tr>
       <th scope="col">Original url</th>
       <th scope="col">Short url</th>
+      {%if user.is_authenticated %}
+      <th scope="col">visits</th>
+      {%endif%}
     </tr>
   </thead>
   <tbody>
@@ -16,9 +19,16 @@
     <tr>
       <td>{{object.uri }}</td>
       <td><a href="/{{object.shorturi}}">{{object.shorturi}}</a></td>
+      {%if user.is_authenticated %}
+
+      <td>{{object.count }}</td>
+      {%endif%}
+
+
     </tr>
   {%endfor%}
   </tbody>
 </table>
+<small>*visits column in table shows <b>number of visits </b>though <b>short url only</b></small>
 </div>
  {% endblock %}
