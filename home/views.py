@@ -33,11 +33,12 @@ class short(View):
             shorturi = request.POST.get('shorturl')
             if url== "" or shorturi == "":
                 err_msg = "All Fields are Required!"
-                context = {'err_msg':err_msg}
+            elif len(shorturi)>10:
+                err_msg="short url name length should be less than 10"
             elif UserShort.objects.filter(user=request.user,shorturi=shorturi):
                 err_msg="A short url with this name already exist. Try another"
-                context = {'err_msg':err_msg}
             if err_msg:
+                context = {'err_msg':err_msg}
                 return render(request,'usershort.html',context)
             else:
                 object=UserShort()
